@@ -1,0 +1,1215 @@
+/* Base Styles */
+:root {
+  --primary-color: #4a6cf7;
+  --secondary-color: #bd93f9;
+  --dark-color: #111827;
+  --light-color: #f9fafb;
+  --text-color: #374151;
+  --accent-color: #ec4899;
+  --border-color: #e5e7eb;
+  --transition: all 0.3s ease;
+}
+
+:root.dark {
+  --primary-color: #6d8dff;       /* Bright blue that pops on dark backgrounds */
+  --secondary-color: #bd93f9;     /* Rich purple with good visibility */
+  --dark-color: #f8f9fa;          /* Off-white for text on dark backgrounds */
+  --light-color: #1a1b26;         /* Deep blue-black for main background */
+  --text-color: #e2e8f0;          /* Soft white for better readability */
+  --accent-color: #ff79c6;        /* Vibrant pink for highlights and accents */
+  --border-color: #2d3748;        /* Dark gray for subtle borders */
+  --card-bg-color: #252a41;       /* Slightly lighter than background for cards */
+  --hover-color: #364158;         /* Subtle highlight for hover effects */
+  --code-bg-color: #282a36;       /* Background for code sections if needed */
+  --success-color: #50fa7b;       /* Green for success states */
+  --error-color: #ff5555;         /* Red for errors */
+  --warning-color: #f1fa8c;       /* Yellow for warnings */
+  --info-color: #8be9fd;          /* Cyan for info messages */
+  --transition: all 0.3s ease;    /* Keep the same transition timing */
+}
+
+/* Add these dark mode specific rules to your CSS file */
+
+/* Background and Element Colors */
+:root.dark body {
+  background-color: var(--light-color); /* Using the dark background from variables */
+}
+
+/* Navbar */
+:root.dark nav {
+  background-color: var(--light-color);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Hero Section */
+:root.dark .hero {
+  background-color: var(--light-color);
+}
+
+/* Cards and Containers */
+:root.dark .project-card,
+:root.dark .skill-item,
+:root.dark .stat-item {
+  background-color: var(--card-bg-color);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Project Elements */
+:root.dark .project-img {
+  background-color: #1e293b;
+}
+
+:root.dark .project-placeholder {
+  color: #8892b0;
+}
+
+:root.dark .project-tags span {
+  background-color: #2d3748;
+}
+
+/* Form Elements */
+:root.dark input, 
+:root.dark textarea {
+  background-color: var(--card-bg-color);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+:root.dark input::placeholder, 
+:root.dark textarea::placeholder {
+  color: #8892b0;
+}
+
+/* Filter Buttons */
+:root.dark .filter-btn {
+  background-color: var(--card-bg-color);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+:root.dark .filter-btn.active,
+:root.dark .filter-btn:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Text Colors */
+:root.dark .section-title {
+  color: var(--dark-color); /* This is actually light in dark mode due to variable swap */
+}
+
+/* Mobile Menu */
+:root.dark .nav-links {
+  background-color: var(--light-color);
+}
+
+:root.dark .hamburger span {
+  background-color: var(--text-color);
+}
+
+:root.theme-transition::before {
+  content: '';
+  position:fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--light-color);
+  z-index: 9999;
+  pointer-events: none;
+}
+
+:root.theme-transition.transition-ltr::before {
+  animation: sweepAnimationLTR 1s ease forwards;
+}
+
+:root.theme-transition.transition-rtl::before {
+  animation: sweepAnimationRTL 1s ease forwards;
+}
+
+@keyframes sweepAnimationLTR {
+  0% {
+      transform: translateX(-100%);
+  }
+  100% {
+      transform: translateX(100%);
+  }
+}
+
+/* Animation for right to left */
+@keyframes sweepAnimationRTL {
+  0% {
+      transform: translateX(100%);
+  }
+  100% {
+      transform: translateX(-100%);
+  }
+}
+
+/* Make sure background color is set properly for dark mode */
+:root.dark.theme-transition::before {
+  background-color: var(--light-color); /* Uses the dark background from variables */
+}
+
+:root.dark.theme-transition::before {
+  background-color: var(--card-bg-color);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--text-color);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.toggle-btn {
+  font-size: 1.5rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: var(--text-color);
+}
+
+.toggle-btn:hover {
+  opacity: 0.7;
+}
+
+/* Navigation Styles */
+nav {
+  background-color: var(--light-color);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+}
+
+.nav-links li {
+  margin-left: 1.5rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.nav-links a:hover, .nav-links a.active {
+  color: var(--primary-color);
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: var(--text-color);
+  margin: 2px 0;
+  transition: var(--transition);
+}
+
+/* Hero Section */
+.hero {
+  padding: 8rem 0 5rem;
+  background-color: transparent; /* Remove background color to show stars */
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+
+/*star*/
+/* Enhanced Hero Section with Stars */
+
+
+
+/* Star background container */
+.hero-stars-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+
+}
+.stars-small, .stars-medium, .stars-large, .shooting-star {
+  display: none;
+}
+
+:root.dark .hero-stars-bg {
+  background: linear-gradient(to bottom, #0b0d26, var(--light-color));
+}
+
+:root.dark .stars-small,
+:root.dark .stars-medium,
+:root.dark .stars-large,
+:root.dark .shooting-star {
+  display: block; /* Show these elements in dark mode */
+}
+/* First star layer - smaller stars */
+.stars-small {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(1px 1px at 20px 30px, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0)),
+    radial-gradient(1px 1px at 40px 70px, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0)),
+    radial-gradient(1px 1px at 50px 160px, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0)),
+    radial-gradient(1px 1px at 90px 40px, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0)),
+    radial-gradient(1px 1px at 130px 80px, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0)),
+    radial-gradient(1px 1px at 160px 120px, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+  background-size: 200px 200px;
+  background-repeat: repeat;
+  animation: twinkle-small 4s ease-in-out infinite alternate;
+}
+
+/* Second star layer - medium stars */
+.stars-medium {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(1.5px 1.5px at 200px 50px, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0)),
+    radial-gradient(1.5px 1.5px at 230px 180px, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0)),
+    radial-gradient(1.5px 1.5px at 270px 130px, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0)),
+    radial-gradient(1.5px 1.5px at 300px 70px, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0)),
+    radial-gradient(1.5px 1.5px at 350px 120px, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0)),
+    radial-gradient(1.5px 1.5px at 380px 50px, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+  background-size: 400px 400px;
+  background-repeat: repeat;
+  animation: twinkle-medium 6s ease-in-out infinite alternate;
+  opacity: 0.7;
+}
+
+/* Third star layer - larger stars */
+.stars-large {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(2px 2px at 420px 180px, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0)),
+    radial-gradient(2px 2px at 450px 90px, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0)),
+    radial-gradient(2px 2px at 490px 130px, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0)),
+    radial-gradient(2px 2px at 100px 200px, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0)),
+    radial-gradient(2px 2px at 320px 250px, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0)),
+    radial-gradient(2px 2px at 150px 300px, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0));
+  background-size: 500px 500px;
+  background-repeat: repeat;
+  animation: twinkle-large 7s ease-in-out infinite alternate;
+  opacity: 0.5;
+}
+
+/* Shooting stars */
+.shooting-star {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 1px;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+  border-radius: 50%;
+  animation: shooting 6s linear infinite;
+  opacity: 0;
+}
+
+.shooting-star:nth-child(1) {
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.shooting-star:nth-child(2) {
+  top: 35%;
+  left: 50%;
+  animation-delay: 3.5s;
+}
+
+.shooting-star:nth-child(3) {
+  top: 15%;
+  left: 70%;
+  animation-delay: 7s;
+}
+
+/* Hero container styles - ensure content is visible over stars */
+
+
+/* Add a subtle glow to hero content */
+
+
+/* Animation for small stars */
+@keyframes twinkle-small {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Animation for medium stars */
+@keyframes twinkle-medium {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+
+/* Animation for large stars */
+@keyframes twinkle-large {
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
+
+/* Animation for shooting stars */
+@keyframes shooting {
+  0% {
+    transform: rotate(30deg) translateX(0) translateY(0);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  15% {
+    transform: rotate(30deg) translateX(-500px) translateY(300px);
+    opacity: 0;
+  }
+  100% {
+    transform: rotate(30deg) translateX(-500px) translateY(300px);
+    opacity: 0;
+  }
+}
+
+/* Add this to your :root variables for RGBA versions of colors */
+:root {
+  --primary-color-rgb: 74, 108, 247; /* RGB version of #4a6cf7 */
+}
+
+/* Dark mode adjustments */
+:root.dark .hero-stars-bg {
+  background: linear-gradient(to bottom, #0b0d26, var(--light-color));
+}
+
+/* Additional ambient glow - adding a subtle blue glow */
+.hero::after {
+  content: '';
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(var(--primary-color-rgb), 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+  top: 30%;
+  left: 70%;
+  border-radius: 50%;
+  z-index: -1;
+  animation: glow 8s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  0% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0.6;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .shooting-star {
+    width: 60px;
+  }
+  
+  .hero::after {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.hero .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2
+}
+
+.hero-content {
+  text-shadow: 0 0 10px rgba(var(--primary-color-rgb), 0.3);
+}
+
+.hero-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-container {
+  width: 500px;
+  height: 500px;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 5px solid var(--primary-color);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.profile-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.highlight {
+  color: var(--primary-color);
+}
+
+.hero-buttons {
+  margin-top: 2rem;
+  display: flex;
+}
+
+.social-icons {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.social-icons a {
+  font-size: 1.5rem;
+  color: var(--text-color);
+  transition: var(--transition);
+}
+
+.social-icons a:hover {
+  color: var(--primary-color);
+}
+
+/* Button Styles */
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-right: 1rem;
+}
+
+.primary-btn {
+  background-color: var(--primary-color);
+  color: white
+}
+
+.primary-btn:hover {
+  background-color: var(--secondary-color);
+}
+
+.secondary-btn {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+}
+
+.secondary-btn:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Section Styles */
+section {
+  padding: 5rem 0;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: var(--dark-color);
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 4px;
+  background-color: var(--primary-color);
+  margin: 0.5rem auto 0;
+}
+
+/* About Section */
+.about-content {
+  display: flex;
+  gap: 3rem;
+}
+
+.about-text {
+  flex: 2;
+}
+
+.about-text p {
+  margin-bottom: 1rem;
+}
+
+.about-stats {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.stat-item {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  flex: 1;
+  min-width: 120px;
+  text-align: center;
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.stat-item:hover {
+  transform: translateY(-10px);
+}
+
+.stat-item h3 {
+  font-size: 2rem;
+  color: var(--primary-color);
+}
+
+/* Skills Section */
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.skill-category {
+  flex: 1;
+  min-width: 250px;
+}
+
+.skill-category h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: var(--primary-color);
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 1.5rem;
+}
+
+.skill-item {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  transition: var(--transition);
+}
+
+.skill-item:hover {
+  transform: translateY(-5px);
+}
+
+.skill-item i {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+/* Projects Section */
+.filter-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.filter-btn {
+  padding: 0.5rem 1rem;
+  background-color: white;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.filter-btn.active, .filter-btn:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.project-card {
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: var(--transition);
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+}
+
+.project-img {
+  height: 200px;
+  overflow: hidden;
+  background-color: #f1f5f9;
+}
+
+.project-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.project-content {
+  padding: 1.5rem;
+}
+
+.project-content h3 {
+  margin-bottom: 0.5rem;
+}
+
+.project-tags {
+  margin: 1rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.project-tags span {
+  background-color: #f1f5f9;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+}
+
+.project-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.project-links a {
+  color: var(--text-color);
+  transition: var(--transition);
+}
+
+.project-links a:hover {
+  color: var(--primary-color);
+}
+
+/* Contact Section */
+.contact-content {
+  display: flex;
+  gap: 3rem;
+}
+
+.contact-info {
+  flex: 1;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.contact-item i {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  margin-right: 1rem;
+}
+
+.contact-form {
+  flex: 2;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 5px;
+  border: 1px solid var(--border-color);
+  font-size: 1rem;
+}
+
+textarea {
+  height: 150px;
+  resize: vertical;
+}
+
+.submit-btn {
+  width: 100%;
+}
+
+/* Footer */
+footer {
+  background-color: var(--dark-color);
+  color: var(--light-color);
+  padding: 2rem 0;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.back-to-top {
+  background-color: var(--primary-color);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: var(--transition);
+}
+
+.back-to-top:hover {
+  background-color: var(--secondary-color);
+}
+
+.back-to-top a {
+  color: white;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 992px) {
+  .hero .container {
+      flex-direction: column-reverse;
+      text-align: center;
+  }
+  
+  .hero-content, .hero-image {
+      flex: none;
+      width: 100%;
+  }
+  
+  .hero-image {
+      margin-bottom: 2rem;
+  }
+  
+  .hero-buttons {
+      justify-content: center;
+  }
+  
+  .social-icons {
+      justify-content: center;
+  }
+  
+  .about-content {
+      flex-direction: column;
+  }
+  
+  .skills-container {
+      flex-direction: column;
+  }
+  
+  .contact-content {
+      flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      flex-direction: column;
+      background-color: white;
+      padding: 1rem 0;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .nav-links.active {
+      display: flex;
+  }
+  
+  .nav-links li {
+      margin: 0;
+      text-align: center;
+      padding: 0.5rem 0;
+  }
+  
+  .hamburger {
+      display: flex;
+  }
+  
+  .hero h1 {
+      font-size: 2.5rem;
+  }
+  
+  .hero h2 {
+      font-size: 1.7rem;
+  }
+  
+  .section-title {
+      font-size: 2rem;
+  }
+  
+  .about-stats {
+      justify-content: center;
+  }
+  
+  .stat-item {
+      min-width: 100px;
+  }
+  
+  .projects-grid {
+      grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero h1 {
+      font-size: 2rem;
+  }
+  
+  .hero h2 {
+      font-size: 1.5rem;
+  }
+  
+  .hero-buttons {
+      flex-direction: column;
+      align-items: center;
+  }
+  
+  .btn {
+      margin-right: 0;
+      margin-bottom: 1rem;
+      width: 100%;
+      text-align: center;
+  }
+  
+  .profile-container {
+      width: 200px;
+      height: 200px;
+  }
+  
+  .section-title {
+      font-size: 1.8rem;
+  }
+  
+  .filter-buttons {
+      flex-direction: column;
+      width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+  }
+  
+  .filter-btn {
+      margin-bottom: 0.5rem;
+  }
+}
+
+/* SCROLL ANIMATION STYLES */
+/* Animation Base Styles */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered animations for skills */
+.skill-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+.skill-item.active:nth-child(1) { transition-delay: 0.1s; }
+.skill-item.active:nth-child(2) { transition-delay: 0.2s; }
+.skill-item.active:nth-child(3) { transition-delay: 0.3s; }
+.skill-item.active:nth-child(4) { transition-delay: 0.4s; }
+.skill-item.active:nth-child(5) { transition-delay: 0.5s; }
+.skill-item.active:nth-child(6) { transition-delay: 0.6s; }
+
+.skill-item.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Project card animations */
+.project-card {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.project-card.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* About section stats animations */
+.stat-item {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.stat-item.active:nth-child(1) { transition-delay: 0.1s; }
+.stat-item.active:nth-child(2) { transition-delay: 0.3s; }
+.stat-item.active:nth-child(3) { transition-delay: 0.5s; }
+
+.stat-item.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Section title animations */
+.section-title {
+  position: relative;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.section-title.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-title.active::after {
+  width: 80px;
+  transition: width 0.6s ease-out 0.3s;
+}
+
+/* Subtle parallax for hero section */
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-image {
+  transition: transform 0.3s ease-out;
+}
+
+/* Contact form animation */
+.contact-form .form-group {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+.contact-form .form-group.active:nth-child(1) { transition-delay: 0.1s; }
+.contact-form .form-group.active:nth-child(2) { transition-delay: 0.2s; }
+.contact-form .form-group.active:nth-child(3) { transition-delay: 0.3s; }
+.contact-form .form-group.active:nth-child(4) { transition-delay: 0.4s; }
+
+.contact-form .form-group.active {
+  opacity: 1;
+  transform: translateY(0);
+}
