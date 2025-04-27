@@ -8,6 +8,7 @@
   --accent-color: #ec4899;
   --border-color: #e5e7eb;
   --transition: all 0.3s ease;
+  --moon-color: #f5f5f5;
 }
 
 :root.dark {
@@ -25,7 +26,8 @@
   --error-color: #ff5555;         /* Red for errors */
   --warning-color: #f1fa8c;       /* Yellow for warnings */
   --info-color: #8be9fd;          /* Cyan for info messages */
-  --transition: all 0.3s ease;    /* Keep the same transition timing */
+  --transition: all 0.3s ease; 
+    /* Keep the same transition timing */
 }
 
 /* Add these dark mode specific rules to your CSS file */
@@ -277,7 +279,7 @@ nav {
   z-index: -1;
 
 }
-.stars-small, .stars-medium, .stars-large, .shooting-star {
+.stars-small, .stars-medium, .stars-large, .shooting-star ,.moon-container {
   display: none;
 }
 
@@ -288,6 +290,8 @@ nav {
 :root.dark .stars-small,
 :root.dark .stars-medium,
 :root.dark .stars-large,
+:root.dark .moon-container
+:root.dark .half-moon
 :root.dark .shooting-star {
   display: block; /* Show these elements in dark mode */
 }
@@ -299,7 +303,7 @@ nav {
   width: 100%;
   height: 100%;
   background-image: 
-    radial-gradient(1px 1px at 20px 30px, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0)),
+    radial-gradient(3px 3px at 20px 30px, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0)),
     radial-gradient(1px 1px at 40px 70px, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0)),
     radial-gradient(1px 1px at 50px 160px, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0)),
     radial-gradient(1px 1px at 90px 40px, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0)),
@@ -441,6 +445,40 @@ nav {
     opacity: 0;
   }
 }
+
+.half-moon {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: transparent;
+  box-shadow: 15px 0 0 0 var(--moon-color);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  margin-top: 20px;
+}
+
+/* Optional: Add a container with dark background to see the moon better */
+.moon-container {
+  background-color: #0b1026;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+}
+:root.dark .half-moon {
+  opacity: 1;
+}
+
+
+
+
+
+
+
+
 
 /* Add this to your :root variables for RGBA versions of colors */
 :root {

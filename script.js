@@ -134,37 +134,62 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Form submission with validation
     const contactForm = document.getElementById('contactForm');
-    const formStatus = document.getElementById('formStatus');
-    
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Basic form validation
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            
-            if (!name || !email || !message) {
-                formStatus.innerHTML = '<p class="error">Please fill in all fields</p>';
-                return;
+const formStatus = document.getElementById('formStatus');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        // Basic form validation
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const subject = document.getElementById('subject').value.trim();
+        const message = document.getElementById('message').value.trim();
+        
+        if (!name || !email || !subject || !message) {
+            formStatus.innerHTML = '<p class="error">Please fill in all fields.</p>';
+            return;
+        }
+
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            formStatus.innerHTML = '<p class="error">Please enter a valid email address.</p>';
+            return;
+        }
+
+        // Send form data to Formspree
+        const formData = new FormData(contactForm);
+
+        try {
+            const response = await fetch(contactForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                formStatus.innerHTML = '<p class="success">Your message has been sent! I\'ll get back to you soon.</p>';
+                contactForm.reset();
+            } else {
+                const result = await response.json();
+                if (result.errors) {
+                    formStatus.innerHTML = `<p class="error">${result.errors.map(e => e.message).join(", ")}</p>`;
+                } else {
+                    formStatus.innerHTML = '<p class="error">Oops! Something went wrong.</p>';
+                }
             }
-            
-            // Email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                formStatus.innerHTML = '<p class="error">Please enter a valid email address</p>';
-                return;
-            }
-            
-            // In a real implementation, you would send the form data to a server here
-            formStatus.innerHTML = '<p class="success">Your message has been sent! I\'ll get back to you soon.</p>';
-            contactForm.reset();
-            
-            setTimeout(() => {
-                formStatus.innerHTML = '';
-            }, 5000);
-        });
+        } catch (error) {
+            formStatus.innerHTML = '<p class="error">Network error. Please try again later.</p>';
+        }
+
+        setTimeout(() => {
+            formStatus.innerHTML = '';
+        }, 5000);
+    });
+
     }
     
     // Back to top button with smooth scroll
@@ -284,7 +309,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 observer.unobserve(element);
                             }
                         });
-                    }, { threshold: 0.1 }); // 10% visibility threshold
+                    }, { threshold: 1.0 }); // 10% visibility threshold
                     
                     observer.observe(element);
                 }, 1000); // Wait for animation to complete before setting up observer
