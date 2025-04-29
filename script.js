@@ -235,7 +235,7 @@ if (contactForm) {
         if (themeImage) themeImage.src = 'images/dark1.png';
     } else {
         if (themeToggleBtn) themeToggleBtn.textContent = '🌚';
-        if (themeImage) themeImage.src = 'images/light.jpg';
+        if (themeImage) themeImage.src = 'images/dark1.png';
     }
     
     if (themeToggleBtn) {
@@ -256,7 +256,7 @@ if (contactForm) {
             
             // Update theme image if it exists
             if (themeImage) {
-                themeImage.src = isDark ? 'images/dark1.png' : 'images/light.jpg';
+                themeImage.src = isDark ? 'images/dark1.png' : 'images/dark1.png';
             }
             
             // Remove transition classes after animation completes
