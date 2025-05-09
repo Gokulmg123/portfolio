@@ -309,7 +309,7 @@ if (contactForm) {
                                 observer.unobserve(element);
                             }
                         });
-                    }, { threshold: 1.0 }); // 10% visibility threshold
+                    }, { threshold: .20 }); // 10% visibility threshold
                     
                     observer.observe(element);
                 }, 1000); // Wait for animation to complete before setting up observer
